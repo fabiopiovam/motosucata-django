@@ -9,8 +9,8 @@ __pycache__/
 .Python
 env/
 venv/
-media/*
-static/*
+media/
+static/
 bin/
 build/
 develop-eggs/
