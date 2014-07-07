@@ -8,6 +8,8 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
+media/
 bin/
 build/
 develop-eggs/
@@ -52,3 +54,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+motosucata/settings_local.py
+motosucata/settings_production.py
