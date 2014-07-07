@@ -102,11 +102,6 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
     def clean(self):
-        """
-        Makes sure the company for client is the same as the company for the 
-        customer contact person. Note that you need to check for `None` too
-        if the fields are not required.
-        """
         if not self.model.mark.id == self.mark.id:
             raise ValidationError(u'O Modelo selecionado não condiz com a Marca')
         
