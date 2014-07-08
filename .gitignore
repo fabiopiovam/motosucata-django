@@ -58,3 +58,4 @@ docs/_build/
 
 motosucata/settings_local.py
 motosucata/settings_production.py
+deploy
