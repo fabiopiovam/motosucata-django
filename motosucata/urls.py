@@ -14,7 +14,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^redactor/', include('redactor.urls')),
     
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
+
+if settings.LOCAL:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 try:
     urlpatterns += patterns('', (r'^flexselect/', include('flexselect.urls')), )
