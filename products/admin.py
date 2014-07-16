@@ -64,10 +64,10 @@ class ProductAdmin(admin.ModelAdmin):
             obj.owner_id = request.user.id
         obj.save()
     
+    u"""
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        """
-        Alters the widget displayed for the base field.
-        """
+        u'Alters the widget displayed for the base field.'
+        
         if db_field.name == "model":
             kwargs['widget'] =  MarkModelWidget(
                 base_field=db_field,
@@ -76,6 +76,8 @@ class ProductAdmin(admin.ModelAdmin):
             )
             
         return super(ProductAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    """
+    
 
 class ModelAdmin(admin.ModelAdmin):
     list_display = ('name','mark')
