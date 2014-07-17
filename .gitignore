@@ -10,7 +10,8 @@ __pycache__/
 env/
 venv/
 media/
-static/
+static/*
+!static/products/
 bin/
 build/
 develop-eggs/
