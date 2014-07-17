@@ -64,6 +64,7 @@ class ProductAdmin(admin.ModelAdmin):
             obj.owner_id = request.user.id
         obj.save()
     
+    u"""
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         u'Alters the widget displayed for the base field.'
         
@@ -75,6 +76,7 @@ class ProductAdmin(admin.ModelAdmin):
             )
             
         return super(ProductAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+    """
     
 
 class ModelAdmin(admin.ModelAdmin):
