@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %} &raquo; MotoSucata.biz</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'products/css/normalize.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'products/css/webflow.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'products/css/motosucata.webflow.css' %}">
+        <link rel="icon" type="image/x-icon" href="{% static '/img/favicon.ico' %}">
+        <link rel="apple-touch-icon" href="{% static '/img/thumbnail-starter.png' %}">
+        
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <div class="nav-section">
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-4">
+                        <div class="company">MotoSucata</div>
+                    </div>
+                    <div class="w-col w-col-8 navigation-column">
+                        <a class="nav-link" href="#">Início</a>
+                        <a class="nav-link" href="#">Sucatas Inteiras</a>
+                        <a class="nav-link" href="#">Peças Avulsas</a>
+                        <a class="nav-link last" href="#">Motos Documentadas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section hero">
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-6 center">
+                        <img data-src="holder.js/270x270" alt="">
+                    </div>
+                    <div class="w-col w-col-6 hero-column">
+                        <h1>This is a heading</h1>
+                        <p>This is a description that describes this site. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                            mus.</p><a class="button action" href="#">Action button</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% block content %}{% endblock %}
+        
+        <div class="section footer">
+            <div class="w-container">
+                <div class="w-row">
+                    <div class="w-col w-col-6">
+                        <div>© Copyright Company Title</div>
+                    </div>
+                    <div class="w-col w-col-6"><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="{% static 'products/js/webflow.js' %}" defer></script>
+    <script src="{% static 'products/js/holder/holder.js' %}" type="text/javascript" charset="utf-8"></script>
+    {% block script %}{% endblock %}
+</html>
