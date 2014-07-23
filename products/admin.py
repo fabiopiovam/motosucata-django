@@ -46,15 +46,15 @@ class PhotoInline(admin.TabularInline):
     fields = ['image','main','title']
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'type', 'owner', 'mark', 'model', 'published')
-    list_filter = ['published','type','mark__name']
+    list_display = ('title', 'type', 'owner', 'mark', 'model', 'published','banner_home')
+    list_filter = ['published','banner_home','type','mark__name']
     search_fields = ['title','slug','mark__name','model__name', 'owner__username']
     
     fieldsets = [
         (None,                      {'fields': ['type','mark','model','version','year','km','brakes','starting_system','price','used']}),
         (u'Localização do veículo', {'fields': ['city','state']}),
         (u'Dados para contatos',    {'fields': ['phone']}),
-        (u'Dados para publicação',  {'fields': ['title','video_link','description','published']}),
+        (u'Dados para publicação',  {'fields': ['title','video_link','description','published','banner_home']}),
     ]
     
     inlines = [PhotoInline]

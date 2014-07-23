@@ -87,6 +87,10 @@ class Photo(models.Model):
     image = ThumbnailerImageField(u'Imagem', blank=True, upload_to = get_upload_to_image, resize_source=dict(size=(800, 600), sharpen=True, crop="scale"))
     title = models.CharField(u'Título', max_length=100, blank=True)
     main = models.BooleanField(u'Foto de capa')
+    
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductManager, self).get_queryset().filter(published=True).order_by('-banner_home','-updated_at')
 
 class Product(models.Model):
     def __unicode__(self):
@@ -114,6 +118,9 @@ class Product(models.Model):
         if os.path.exists(dir):
             shutil.rmtree(dir)
     
+    def main_photo_set(self):
+        return self.photo_set.order_by('-main')[0]
+    
     brakes = models.ForeignKey(Brake, verbose_name=u"Sistema de Freio")
     starting_system = models.ForeignKey('StartingSystem', verbose_name=u"Sistema de Partida")
     mark = models.ForeignKey(Mark, verbose_name=u"Marca")
@@ -135,8 +142,15 @@ class Product(models.Model):
     phone = models.CharField(u'Telefone', max_length=120, blank=True)
     used = models.BooleanField(u'Usado') # This field type is a guess.
     published = models.BooleanField(u'Publicado', default=True) # This field type is a guess.
+    banner_home = models.BooleanField(u'Banner principal', default=False, help_text=u"Marque esta opção para que o produto apareça em posição de destaque no site")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    u'''
+    Managers
+    '''
+    objects     = models.Manager()
+    activated   = ProductManager()
 
 class StartingSystem(models.Model):
     def __unicode__(self):

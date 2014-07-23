@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}{% endblock %} &raquo; MotoSucata.biz</title>
+        <title>{% block title %}{% endblock %} | MotoSucata.biz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{% static 'products/css/normalize.css' %}">
@@ -31,36 +31,30 @@
             </div>
         </div>
         
-        <div class="section hero">
-            <div class="w-container">
-                <div class="w-row">
-                    <div class="w-col w-col-6 center">
-                        <img data-src="holder.js/270x270" alt="">
-                    </div>
-                    <div class="w-col w-col-6 hero-column">
-                        <h1>This is a heading</h1>
-                        <p>This is a description that describes this site. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                            mus.</p><a class="button action" href="#">Action button</a>
-                    </div>
-                </div>
-            </div>
+        <div class="main-section">
+            {% block content %}
+            
+            {% endblock %}
         </div>
-        
-        {% block content %}{% endblock %}
         
         <div class="section footer">
             <div class="w-container">
                 <div class="w-row">
                     <div class="w-col w-col-6">
-                        <div>© Copyright Company Title</div>
+                        <div>© motosucata.biz</div>
                     </div>
-                    <div class="w-col w-col-6"><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a><a class="footer-link" href="#">Text Link</a>
+                    <div class="w-col w-col-6">
+                        <a class="footer-link" href="#">Sobre nós</a>
+                        <a class="footer-link" href="#">Formas de Pagamento</a>
+                        <a class="footer-link" href="#">Formas de Entrega</a>
+                        <a class="footer-link" href="#">Contato</a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <script type="text/javascript" src="{% static 'products/js/webflow.js' %}" defer></script>
+        <script src="{% static 'products/js/holder/holder.js' %}" type="text/javascript" charset="utf-8"></script>
+        {% block script %}{% endblock %}
     </body>
-    <script type="text/javascript" src="{% static 'products/js/webflow.js' %}" defer></script>
-    <script src="{% static 'products/js/holder/holder.js' %}" type="text/javascript" charset="utf-8"></script>
-    {% block script %}{% endblock %}
 </html>
