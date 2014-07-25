@@ -6,6 +6,8 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
+
+P.D.: In requirements.txt make change distribute==0.6.24 to setuptools==1.0
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

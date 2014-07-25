@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
-import random
+import random, glob, os, shutil
 from datetime import datetime
-import glob
-import os
-import shutil
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
 from django.template.defaultfilters import slugify
 from django.conf import settings
 
 from redactor.fields import RedactorField
 from easy_thumbnails.fields import ThumbnailerImageField
+
+
 
 type_choices = (
     (1, u'Sucata Inteira'),
@@ -26,6 +24,8 @@ state_choices = (
     ('RJ', u'Rio de Janeiro'),
 )
 
+
+
 class Brake(models.Model):
     def __unicode__(self):
         return u'%s' % self.name
@@ -36,6 +36,8 @@ class Brake(models.Model):
         
     name = models.CharField(u'Nome', max_length=80)
 
+
+
 class Mark(models.Model):
     def __unicode__(self):
         return u'%s' % self.name
@@ -44,6 +46,8 @@ class Mark(models.Model):
         verbose_name = u"marca"
     
     name = models.CharField(u'Nome', max_length=80)
+
+
 
 class Model(models.Model):
     def __unicode__(self):
@@ -54,6 +58,8 @@ class Model(models.Model):
     
     mark = models.ForeignKey(Mark, verbose_name=u"Marca")
     name = models.CharField(u'Nome', max_length=80)
+
+
 
 class Photo(models.Model):
     class Meta:
@@ -87,10 +93,24 @@ class Photo(models.Model):
     image = ThumbnailerImageField(u'Imagem', blank=True, upload_to = get_upload_to_image, resize_source=dict(size=(800, 600), sharpen=True, crop="scale"))
     title = models.CharField(u'Título', max_length=100, blank=True)
     main = models.BooleanField(u'Foto de capa')
+
+
+
+class StartingSystem(models.Model):
+    def __unicode__(self):
+        return u'%s' % self.name
     
-class ProductManager(models.Manager):
+    class Meta:
+        verbose_name = u"sistema de partida"
+        verbose_name_plural = u"sistemas de partida"
+        
+    name = models.CharField(max_length=40)
+
+
+
+class ProductActivatedManager(models.Manager):
     def get_queryset(self):
-        return super(ProductManager, self).get_queryset().filter(published=True).order_by('-banner_home','-updated_at')
+        return super(ProductActivatedManager, self).get_queryset().filter(published=True).order_by('-banner_home','-updated_at')
 
 class Product(models.Model):
     def __unicode__(self):
@@ -146,18 +166,6 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    u'''
-    Managers
-    '''
+    u''' Managers '''
     objects     = models.Manager()
-    activated   = ProductManager()
-
-class StartingSystem(models.Model):
-    def __unicode__(self):
-        return u'%s' % self.name
-    
-    class Meta:
-        verbose_name = u"sistema de partida"
-        verbose_name_plural = u"sistemas de partida"
-        
-    name = models.CharField(max_length=40)
+    activated   = ProductActivatedManager()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from products.models import *
+from products.models import Product, Brake, Mark, Model, StartingSystem, Photo 
 from django.contrib import admin
 from flexselect import FlexSelectWidget
 
