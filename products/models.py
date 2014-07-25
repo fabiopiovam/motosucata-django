@@ -4,6 +4,7 @@ from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
 from django.conf import settings
@@ -124,10 +125,6 @@ class Product(models.Model):
             super(Product, self).save(*args, **kwargs)
             self.slug = slugify(str(self.id) + ' ' + self.title)
         super(Product, self).save(*args, **kwargs)
-
-    def clean(self):
-        if not self.model.mark.id == self.mark.id:
-            raise ValidationError(u'O Modelo selecionado não condiz com a Marca')
         
     def delete(self):
         slug = self.slug
@@ -138,8 +135,16 @@ class Product(models.Model):
         if os.path.exists(dir):
             shutil.rmtree(dir)
     
+    def clean(self):
+        if not self.model.mark.id == self.mark.id:
+            raise ValidationError(u'O Modelo selecionado não condiz com a Marca')
+    
+    def get_absolute_url(self):
+        return reverse('products.views.details', kwargs={'slug': self.slug})
+    
     def main_photo_set(self):
-        return self.photo_set.order_by('-main')[0]
+        photo = self.photo_set.order_by('-main','id')
+        return photo[0] if photo else None
     
     brakes = models.ForeignKey(Brake, verbose_name=u"Sistema de Freio")
     starting_system = models.ForeignKey('StartingSystem', verbose_name=u"Sistema de Partida")

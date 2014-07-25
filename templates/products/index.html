@@ -10,13 +10,13 @@
         {% for product in product_banner %}
         <div class="w-row">
             <div class="w-col w-col-6 center">
-                <img class="hero-image" width="auto" height="auto" src="{{ product.main_photo_set.image|thumbnail_url:'medium' }}">
+                <img class="hero-image" width="auto" height="auto" src="{{ product.main_photo_set.image|thumbnail_url:'medium'|default:'holder.js/270x270' }}">
             </div>
             <div class="w-col w-col-6 hero-column">
                 <h1>{{ product.title }}</h1>
                 <p>{{ product.mark }} {{ product.model }} - {{ product.get_type_display }} | {{ product.year|stringformat:"s" }} | {{ product.km }} Km</p>
                 <p>{{ product.description|striptags|truncatewords:23 }}</p>
-                <a class="button action" href="{{ product.slug }}" title="Confira!">R$ {{ product.price }}</a>
+                <a class="button action" href="{{ product.get_absolute_url }}" title="Confira!">R$ {{ product.price }}</a>
             </div>
         </div>
         {% endfor %}
@@ -37,11 +37,11 @@
         <div class="w-row">
             {% for product in product_list %}
             <div class="w-col w-col-3 w-col-small-6">
-                <img src='{{ product.main_photo_set.image|thumbnail_url:"small" }}'>
+                <img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
                 <h3>{{ product.title }}</h3>
                 <p>{{ product.get_type_display }}</p>
                 <p>{{ product.year|stringformat:"s" }} | {{ product.km }} Km</p>
-                <a class="button" href="{{ product.slug }}" title="Confira!">R$ {{ product.price }}</a>
+                <a class="button" href="{{ product.get_absolute_url }}" title="Confira!">R$ {{ product.price }}</a>
             </div>
             
             {% if forloop.counter|divisibleby:"4" %}

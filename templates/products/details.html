@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load thumbnail %}
+
+{% block title %} {{ product.title }} {% endblock %}
+
+{% block content %}
+
+<div class="section hero">
+    <div class="w-container">
+        <div class="w-row">
+            {% if product %}
+            <div class="w-col w-col-6 center">
+                <img class="hero-image" width="auto" height="auto" src="{{ product.main_photo_set.image|thumbnail_url:'medium'|default:'holder.js/400x400' }}">
+            </div>
+            <div class="w-col w-col-6 hero-column">
+                <h1>{{ product.title }}</h1>
+                <p>{{ product.mark }} {{ product.model }} - {{ product.get_type_display }} | {{ product.year|stringformat:"s" }} | {{ product.km }} Km</p>
+                <p>{{ product.description|striptags|truncatewords:23 }}</p>
+                <a class="button action" href="{{ product.get_absolute_url }}" title="Confira!">R$ {{ product.price }}</a>
+            </div>
+            {% else %}
+                Desculpe, este produto está indisponível ou não existe em nosso banco de dados.
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

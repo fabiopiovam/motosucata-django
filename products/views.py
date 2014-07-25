@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
+from django.core.exceptions import ObjectDoesNotExist
 
 from models import Product
 
@@ -12,5 +13,17 @@ def index(request):
     context = RequestContext(request, {
         'product_banner': product_banner,
         'product_list'  : product_list,
+    })
+    return HttpResponse(template.render(context))
+
+def details(request, slug):
+    try:
+        product = Product.activated.get(slug=slug)
+    except ObjectDoesNotExist:
+        product = None
+    
+    template = loader.get_template('products/details.html')
+    context = RequestContext(request, {
+        'product'  : product,
     })
     return HttpResponse(template.render(context))

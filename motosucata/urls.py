@@ -7,13 +7,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    url(r'^$', 'products.views.index', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
     url(r'^redactor/', include('redactor.urls')),
     
+    url(r'^$', 'products.views.index', name='home'),
+    url(r'^details/(?P<slug>[\w_-]+)$', 'products.views.details'),
 )
 
 if settings.LOCAL:
