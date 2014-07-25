@@ -9,9 +9,6 @@ __pycache__/
 .Python
 env/
 venv/
-media/
-static/*
-!static/products/
 bin/
 build/
 develop-eggs/
@@ -57,6 +54,16 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Media Files
+media/*
+!media/.empty
+!media/products
+media/products/*
+!media/products/.empty
+static/*
+!static/.empty
+
+# Others
 motosucata/settings_local.py
 motosucata/settings_production.py
 deploy
