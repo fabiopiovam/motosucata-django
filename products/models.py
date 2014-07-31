@@ -4,6 +4,7 @@ from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
+from embed_video.fields import EmbedVideoField
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
@@ -155,8 +156,10 @@ class Product(models.Model):
     type = models.IntegerField(u'Tipo', choices=type_choices)
     title = models.CharField(u'Título', max_length=160)
     slug = models.SlugField(max_length=200)
-    video_link = models.URLField(u'Vídeo', max_length=160, blank=True, help_text=u"Informe o link do youtube")
+    video_link = EmbedVideoField(u'Vídeo', max_length=160, blank=True, help_text=u"Informe o link do youtube")
+    #video_link = models.URLField(u'Vídeo', max_length=160, blank=True, help_text=u"Informe o link do youtube")
     km = models.IntegerField()
+    cc = models.IntegerField(u'Cilindradas', null=True, blank=True)
     version = models.CharField(u'Versão', max_length=40, blank=True)
     year = models.IntegerField(u'Ano', blank=True, null=True)
     price = models.DecimalField(u'Preço', max_digits=6, decimal_places=2, blank=True, null=True)

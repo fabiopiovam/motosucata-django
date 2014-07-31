@@ -3,6 +3,7 @@
 from products.models import Product, Brake, Mark, Model, StartingSystem, Photo 
 from django.contrib import admin
 from flexselect import FlexSelectWidget
+from embed_video.admin import AdminVideoMixin
 
 class MarkModelWidget(FlexSelectWidget):
     """
@@ -45,13 +46,14 @@ class PhotoInline(admin.TabularInline):
     extra = 1
     fields = ['image','main','title']
 
-class ProductAdmin(admin.ModelAdmin):
+
+class ProductAdmin(AdminVideoMixin, admin.ModelAdmin):
     list_display = ('title', 'type', 'owner', 'mark', 'model', 'published','banner_home')
     list_filter = ['published','banner_home','type','mark__name']
     search_fields = ['title','slug','mark__name','model__name', 'owner__username']
     
     fieldsets = [
-        (None,                      {'fields': ['type','mark','model','version','year','km','brakes','starting_system','price','used']}),
+        (None,                      {'fields': ['type','mark','model','version','year','km','cc','brakes','starting_system','price','used']}),
         (u'Localização do veículo', {'fields': ['city','state']}),
         (u'Dados para contatos',    {'fields': ['phone']}),
         (u'Dados para publicação',  {'fields': ['title','video_link','description','published','banner_home']}),

@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 P.D.: In requirements.txt make change distribute==0.6.24 to setuptools==1.0
 """
 
+import django.conf.global_settings as DEFAULT_SETTINGS
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -99,6 +101,7 @@ REDACTOR_UPLOAD = 'static/'
 
 THUMBNAIL_ALIASES = {
     '': {
+        'large': {'size': (500, 375), 'crop': 'scale'},
         'medium': {'size': (425, 425), 'crop': 'smart'},
         'small': {'size': (140, 140), 'crop': 'smart'},
     },
@@ -109,6 +112,9 @@ FLEXSELECT = {
     'include_jquery': True,
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)
 
 # Application definition
 
@@ -123,6 +129,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'redactor',
     'flexselect',
+    'embed_video',
     
     'products',
 )
