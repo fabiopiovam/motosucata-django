@@ -1,0 +1,89 @@
+blockquote {
+    color: #777777;
+    font-style: italic;
+    margin-left: 3em;
+}
+pre {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px dashed #CCCCCC;
+    overflow: auto;
+    padding: 1em;
+}
+
+.w-col-right {
+    float: right !important;
+}
+
+.hero-cuztomized {
+    padding-bottom: 10px !important;
+}
+
+.tn_photo {
+    float: left;
+    margin: 5px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.video_link {
+    height: 350px;
+}
+
+.price {
+    color: #990000;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.description {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+#contact-product fieldset {
+    text-align: left;
+    border: 3px dashed #C3C3C3;
+    padding: 5px;
+    background-color: #F8F8F8;
+}
+
+#contact-product input {
+    width: 100%;
+}
+
+#contact-product textarea {
+    width: 100%;
+    height: 50px;
+}
+
+#contact-product label {
+    font-weight: normal;
+}
+
+#contact-product input[type="submit"] {
+    width: 70px;
+    padding: 5px;
+}
+
+.errorlist {
+    font-size: 10px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    color: #A03636;
+    margin-bottom: -8px;
+}
+
+.mail-message {
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.mail-success {
+    color: #378A29;
+}
+
+.mail-error {
+    color: #A03636;
+}

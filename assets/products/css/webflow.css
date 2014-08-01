@@ -708,10 +708,4 @@ textarea.w-input {
     .w-col-tiny-offset-11 {
         margin-left: 91.66666666666666%
     }
-} 
-
-
-/* CUSTOMIZED */
-.w-col-right {
-    float: right !important;
 }

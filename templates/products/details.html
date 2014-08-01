@@ -1,102 +1,126 @@
 {% extends 'layout.html' %}
 {% load thumbnail %}
 {% load embed_video_tags %}
+{% load staticfiles %}
 
 {% block title %} {{ product.title }} {% endblock %}
 
 {% block head %}
-{{ block.super }} 
-<style type="text/css">
-    blockquote {
-        color: #777777;
-        font-style: italic;
-        margin-left: 3em;
-    }
-    pre {
-        background: none repeat scroll 0 0 #F5F5F5;
-        border: 1px dashed #CCCCCC;
-        overflow: auto;
-        padding: 1em;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" charset="utf-8">
-    function callImage(obj){
-        $("#large-image")
-            .attr('src',$('input',obj).val())
-            .attr('title',$('img',obj).attr('title'))
-            .attr('alt',$('img',obj).attr('alt'));
-        
-        $("#image-description").text($('img',obj).attr('title'));
-        
-        $(".tn_photo").css('border','none');
-        $(obj).css('border','3px solid #B8B8B8');
-    }
-    
-    $(document).on('click', ".tn_photo", function(){ callImage(this); } );
-    
-    callImage($('.tn_photo:first'));
-</script>
+<script src="{% static 'products/js/products.js' %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
+
 
 {% block content %}
 
 {% if not product %}
     Desculpe, este produto está indisponível ou não existe em nosso banco de dados.
 {% else %}
-<div class="section hero" style="padding-bottom:10px !important;">
+<div class="section hero hero-cuztomized">
     <div class="w-container">
 
         <div class="w-row">
+            {% if product.photo_set.count %}
             <div class="w-col w-col-6 w-col-right"> <h2>{{ product.title }}</h2> </div>
             <div class="w-col w-col-6 center">
                 {% for photo in product.photo_set.all %}
-                <div class="tn_photo" id="tn_photo_{{photo.id}}" style="float: left; margin:5px; width: 40px; cursor: pointer;">
+                <div class="tn_photo" id="tn_photo_{{photo.id}}">
                     <img width="auto" height="auto" src="{{ photo.image|thumbnail_url:'small'|default:'holder.js/40x40' }}" title="{{photo.title}}" alt="{{photo.title}}">
                     <input type="hidden" id="url_img_{{photo.id}}" value="{{ photo.image|thumbnail_url:'large'|default:'holder.js/500x375' }}"/>
                 </div>
                 {% endfor %}
             </div>
+            
+            {% else %}
+            <div class="w-col w-col-6"> <h2>{{ product.title }}</h2> </div>
+            {% endif %}
         </div>
         
+        
+        
         <div class="w-row">
+            {% if product.photo_set.count %}
             <div class="w-col w-col-6 center">
-                <img id="large-image" width="auto" height="auto">
+                <img id="large-image" width="auto" height="auto" />
                 <p id="image-description"> </p>
             </div>
+            {% elif product.video_link %}
             <div class="w-col w-col-6">
-                <p style="color: #990000; font-size: 24px; font-weight: bold; margin: 15px 0;">R$ {{ product.price }}</p>
-                <p>{{ product.get_type_display }} | {{ product.year|stringformat:"s" }} {% if product.used %} - Usada{% endif %}</p>
-                <p>{{ product.mark }} {{ product.model }} - {{ product.version }} | {{ product.km }} Km 
+                <div class="video_link">{% video product.video_link '100% x 100%' %}</div>
+            </div>
+            {% endif %}
+            
+            
+            
+            <div class="w-col w-col-3">
+                <p class="price">R$ {{ product.price }}</p>
+                
+                <p>
+                    {{ product.get_type_display }} | {{ product.year|stringformat:"s" }} 
+                    {% if product.used %} - Usada{% endif %}
+                </p>
+                
+                <p>
+                    {{ product.mark }} {{ product.model }} - {{ product.version }} | {{ product.km }} Km 
                     {% if product.cc %} | {{product.cc}} cc {% endif %}
                 </p>
-                <p>Freios: {{ product.brakes }} | Partida: {{ product.starting_system }}</p>
+                
+                <p>
+                    Freios: {{ product.brakes }} | Partida: {{ product.starting_system }}
+                </p>
                 
                 <p>{{ product.city }} - {{ product.state }}</p>
-                <p><strong>{{ product.phone }}</strong></p>
                 
-                <p>DADOS DA POSTAGEM - CORREIOS</p>
-                <p>FORM PARA CONTATO</p>
+                <p><strong>{{ product.phone }}</strong></p>
+            </div>
+            
+            <div class="w-col w-col-3" id="contact-product">
+                <fieldset>
+                    <legend style="font-weight: bold;">
+                        &nbsp; Dúvida ou Proposta &nbsp;
+                    </legend>
+
+                    <form name="form-contact" id="form-contact" action="" method="post" accept-charset="utf-8">
+                        {% if mail_sent == True %}
+                        <p class='mail-message mail-success'>Mensagem enviada com sucesso!<br/>Em breve entraremos em contato.</p>
+                        {% elif mail_sent == False %}
+                        <p class='mail-message mail-error'>Não foi possível enviar a mensagem!<br/>Por favor, tente novamente.</p>
+                        {% endif %}
+                        
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <p>
+                            <input type="submit" value="Enviar"/>
+                        </p>
+                    </form>
+                </fieldset>
             </div>
         </div>
     </div>
 </div>
 <div class="section">
     <div class="w-container">
+        
         <div class="w-row">
             <div class="w-col w-col-12">
                 {% autoescape off %}
-                <div style="margin-bottom: 30px;text-align: left;">{{ product.description }}</div>
+                <div class="description">{{ product.description }}</div>
                 {% endautoescape %}
             </div>
         </div>
+        
+        
+        {% if product.photo_set.count %}
         <div class="w-row">
             <div class="w-col w-col-6">
-                <div style="height: 350px;">{% video product.video_link '100% x 100%' %}</div>
+                <div class="video_link">{% video product.video_link '100% x 100%' %}</div>
             </div>
         </div>
+        {% endif %}
+        
     </div>
 </div>
 {% endif %}
