@@ -41,9 +41,15 @@ def details(request, slug):
             email   = form.cleaned_data['email']
             phone   = form.cleaned_data['phone']
             message = form.cleaned_data['message']
-            message = u'Mensagem enviada por %s <%s> - %s \n\n%s \n\n\nMensagem enviada através da página:\n%s' % (name, email, phone, message, url)
+            message = u'Mensagem enviada por %s <%s> %s \n\n%s \n\n\nMensagem enviada através da página:\n%s' % (name, email, phone, message, url)
             
-            mail_sent = mail_managers(subject, message, fail_silently = not settings.DEBUG)
+            try:
+                mail_managers(subject, message, fail_silently = False)
+                mail_sent = True
+            except Exception as e:
+                mail_sent = False
+                if settings.DEBUG:
+                    raise # reraises the exception
     else:
         form = ContactForm()
     
