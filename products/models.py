@@ -156,7 +156,7 @@ class Product(models.Model):
     type = models.IntegerField(u'Tipo', choices=type_choices)
     title = models.CharField(u'Título', max_length=160)
     slug = models.SlugField(max_length=200)
-    video_link = EmbedVideoField(u'Vídeo', max_length=160, blank=True, help_text=u"Informe o link do youtube")
+    video_link = EmbedVideoField(u'Vídeo', max_length=160, blank=True, help_text=u"Informe o link do youtube, vimeo ou soundcloud")
     #video_link = models.URLField(u'Vídeo', max_length=160, blank=True, help_text=u"Informe o link do youtube")
     km = models.IntegerField()
     cc = models.IntegerField(u'Cilindradas', null=True, blank=True)

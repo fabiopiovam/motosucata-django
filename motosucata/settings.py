@@ -32,13 +32,17 @@ THUMBNAIL_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ["*"]
 
-DEFAULT_FROM_EMAIL = 'your_mail'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'your_account@gmail.com'
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_HOST_USER     = 'your_account@gmail.com'
 EMAIL_HOST_PASSWORD = 'your_password'
-EMAIL_PORT = '587'
-EMAIL_USE_TLS = True
+EMAIL_PORT          = '587'
+EMAIL_USE_TLS       = True
+
+SERVER_EMAIL        = EMAIL_HOST_USER
+EMAIL_SUBJECT_PREFIX= '[your_project_name] '
+DEFAULT_FROM_EMAIL  = 'webmaster_mail'
+ADMINS              = ((u'your name', DEFAULT_FROM_EMAIL),)
+MANAGERS            = ((u'The manager name', 'manager_mail'),)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

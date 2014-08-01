@@ -3,7 +3,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import send_mail
+from django.core.mail import mail_managers
 from django.conf import settings
 
 from models import Product
@@ -35,7 +35,7 @@ def details(request, slug):
         
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = request.get_host() + u' - Interesse em ' + product.title
+            subject = u'Interesse em ' + product.title
             url     = request.build_absolute_uri()
             name    = form.cleaned_data['name']
             email   = form.cleaned_data['email']
@@ -43,10 +43,7 @@ def details(request, slug):
             message = form.cleaned_data['message']
             message = u'Mensagem enviada por %s <%s> - %s \n\n%s \n\n\nMensagem enviada através da página:\n%s' % (name, email, phone, message, url)
             
-            mail_from   = settings.DEFAULT_FROM_EMAIL
-            recipients  = [settings.EMAIL_HOST_USER]
-            
-            mail_sent = send_mail(subject, message, mail_from, recipients, fail_silently=True)
+            mail_sent = mail_managers(subject, message, fail_silently = not settings.DEBUG)
     else:
         form = ContactForm()
     
