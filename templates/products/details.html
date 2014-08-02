@@ -11,6 +11,9 @@
 
 {% block script %}
 <script src="{% static 'products/js/products.js' %}" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="{% static 'products/js/sharethis_buttons.js' %}"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-bd7ed52e-b68b-3aae-ea66-8940604ece00", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 {% endblock %}
 
 
@@ -75,6 +78,12 @@
                 <p>{{ product.city }} - {{ product.state }}</p>
                 
                 <p><strong>{{ product.phone }}</strong></p>
+                
+                <div id="social-buttons">
+                    <span class='st_facebook' title="Facebook"> </span>
+                    <span class='st_twitter' title="Tweet"> </span>
+                    <span class='st_googleplus' title="Google +"> </span>
+                </div>
             </div>
             
             <div class="w-col w-col-3" id="contact-product">

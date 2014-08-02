@@ -87,3 +87,11 @@ pre {
 .mail-error {
     color: #A03636;
 }
+
+#social-buttons {
+    margin: 10px 0;
+}
+
+#social-buttons span {
+    margin-right: 5px;
+}
