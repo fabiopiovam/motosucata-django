@@ -70,6 +70,7 @@ ROOT_URLCONF = 'motosucata.urls'
 
 WSGI_APPLICATION = 'motosucata.wsgi.application'
 
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -135,6 +136,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     
     'easy_thumbnails',
     'redactor',
@@ -151,4 +154,5 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )

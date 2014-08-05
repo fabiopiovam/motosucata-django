@@ -9,8 +9,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^redactor/', include('redactor.urls')),
+    #(r'^pages/', include('django.contrib.flatpages.urls')),
     
     url(r'^$', 'products.views.index', name='home'),
+    url(r'^contact/?$', 'products.views.contact'),
     url(r'^(?P<slug>[\w_-]+)$', 'products.views.details'),
 )
 

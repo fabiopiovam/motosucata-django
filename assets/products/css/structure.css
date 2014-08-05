@@ -234,3 +234,8 @@ p {
         padding-left: 0px;
     }
 }
+
+.flatpage-content p {
+    font-size: 14px;
+    margin: 15px 0;
+}

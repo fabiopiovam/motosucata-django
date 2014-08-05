@@ -41,43 +41,48 @@ pre {
     text-align: left;
 }
 
-#contact-product fieldset {
+#contact-form fieldset {
     text-align: left;
     border: 3px dashed #C3C3C3;
     padding: 5px;
     background-color: #F8F8F8;
 }
 
-#contact-product input {
+#contact-form legend {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#contact-form input {
     width: 100%;
 }
 
-#contact-product textarea {
+#contact-form textarea {
     width: 100%;
-    height: 50px;
+    height: 150px;
 }
 
-#contact-product label {
+#contact-form label {
     font-weight: normal;
 }
 
-#contact-product input[type="submit"] {
+#contact-form input[type="submit"] {
     width: 70px;
     padding: 5px;
 }
 
 .errorlist {
-    font-size: 10px;
+    font-size: 12px;
     list-style: none outside none;
-    margin: 0;
     padding: 0;
     color: #A03636;
-    margin-bottom: -8px;
+    margin: 10px 0 -5px;
 }
 
 .mail-message {
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 5px 0;
 }
 
 .mail-success {
@@ -86,6 +91,29 @@ pre {
 
 .mail-error {
     color: #A03636;
+}
+
+#contact-form.contact-product legend {
+    font-size: 12px !important;
+}
+
+#contact-form.contact-product .errorlist {
+    font-size: 10px !important;
+    margin: 0 0 -6px !important;
+}
+
+#contact-form.contact-product label {
+    margin-bottom: 0 !important;
+}
+
+#contact-form.contact-product textarea {
+    height: 50px;
+}
+
+#contact-form.contact-product .mail-message {
+    font-size: 10px;
+    line-height: 12px;
+    margin: 0;
 }
 
 #social-buttons {

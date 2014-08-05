@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{ flatpage.title }} {% endblock %}
+
+{% block content %}
+
+<div class="session">
+    <div class="w-container flatpage-content">
+        <br/>
+        <h3>{{ flatpage.title }}</h3>
+        <hr/>
+        <p>
+            {{ flatpage.content|linebreaks }}
+        </p>
+        <br/>
+    </div>
+</div>
+
+{% endblock %}
