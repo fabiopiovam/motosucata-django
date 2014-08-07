@@ -123,6 +123,8 @@ FLEXSELECT = {
     'include_jquery': True,
 }
 
+SESSION_COOKIE_NAME = 'sessionid' # Cookie name. This can be whatever you want.
+
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
 )
