@@ -6,8 +6,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import mail_managers
 from django.conf import settings
 
-from models import Product
+from models import Product, type_choices
 from forms import ContactForm
+from utils import get_query
 
 
 def index(request):
@@ -23,17 +24,48 @@ def index(request):
     return HttpResponse(template.render(context))
 
 
+def search(request, column="", text=""):
+    query_string = ''
+    product_list = None
+    if text.strip():
+        if column == 'type':
+            type_reverse = dict((v.lower().replace(' ','-'), k) for k, v in type_choices)
+            try:
+                product_list = Product.activated.filter(type=type_reverse[text])
+            except KeyError:
+                product_list = None
+                
+        else:
+            query_string = text.replace('-',' ')
+            entry_query = get_query(query_string, ['title', 'mark__name', 'model__name', 'description',])
+            product_list = Product.activated.filter(entry_query)
+    
+    template = loader.get_template('products/search_results.html')
+    context = RequestContext(request, {
+        'query_string': query_string, 
+        'product_list': product_list,
+    })
+    return HttpResponse(template.render(context))
+
+
 def details(request, slug):
     try:
         product = Product.activated.get(slug=slug)
     except ObjectDoesNotExist:
         product = None
     
+    try:
+        http_referer = request.environ['HTTP_REFERER']
+    except KeyError:
+        http_referer = '/'
+    
     mail_sent = None
     
     if request.method == 'POST':
+        http_referer = request.POST['http_referer']
         
         form = ContactForm(request.POST)
+        
         if form.is_valid():
             subject = u'Interesse em ' + product.title
             url     = request.build_absolute_uri()
@@ -58,6 +90,7 @@ def details(request, slug):
         'product'   : product,
         'form'      : form,
         'mail_sent' : mail_sent,
+        'http_referer' : http_referer,
     })
     return HttpResponse(template.render(context))
 

@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^$', 'products.views.index', name='home'),
     url(r'^contact/?$', 'products.views.contact'),
     url(r'^(?P<slug>[\w_-]+)$', 'products.views.details'),
+    url(r'^q/(?P<column>(type)?)/?(?P<text>[\w -]{0,100})$', 'products.views.search'),
 )
 
 try:

@@ -21,11 +21,24 @@
 {% block content %}
 
 {% if not product %}
-    Desculpe, este produto está indisponível ou não existe em nosso banco de dados.
+<div class="section hero">
+    <div class="w-container">
+        <p>Desculpe, este produto está indisponível ou não existe em nosso banco de dados.</p>
+    </div>
+</div>
+<div class="section">
+    <div class="w-container">
+        {% include "products/_search_form.html" %}
+    </div>
+</div>
+
 {% else %}
+
+<div class="w-container" id="nav-products">
+    <div> <a href="{{http_referer}}" title="voltar">&laquo; voltar</a> </div>
+</div>
 <div class="section hero hero-cuztomized">
     <div class="w-container">
-
         <div class="w-row">
             {% if product.photo_set.count %}
             <div class="w-col w-col-6 w-col-right"> <h2>{{ product.title }}</h2> </div>
@@ -101,6 +114,7 @@
                         {% endif %}
                         
                         {% csrf_token %}
+                        <input type="hidden" name="http_referer" value="{{http_referer}}" id="http_referer"/>
                         {{ form.as_p }}
                         <p>
                             <input type="submit" value="Enviar"/>

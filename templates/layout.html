@@ -19,13 +19,13 @@
             <div class="w-container">
                 <div class="w-row">
                     <div class="w-col w-col-4">
-                        <div class="company">MotoSucata</div>
+                        <div class="company"><a href="/" title="início">MotoSucata</a></div>
                     </div>
                     <div class="w-col w-col-8 navigation-column">
                         <a class="nav-link" href="/">Início</a>
-                        <a class="nav-link" href="#">Sucatas Inteiras</a>
-                        <a class="nav-link" href="#">Peças Avulsas</a>
-                        <a class="nav-link last" href="#">Motos Documentadas</a>
+                        <a class="nav-link" href="/q/type/sucata-inteira">Sucatas Inteiras</a>
+                        <a class="nav-link" href="/q/type/peça-avulsa">Peças Avulsas</a>
+                        <a class="nav-link last" href="/q/type/moto-documentada">Motos Documentadas</a>
                     </div>
                 </div>
             </div>
@@ -55,6 +55,7 @@
         
         <script type="text/javascript" src="{% static 'products/js/webflow.js' %}"></script>
         <script src="{% static 'products/js/holder/holder.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="{% static 'products/js/search.js' %}"></script>
         {% block script %}{% endblock %}
     </body>
 </html>

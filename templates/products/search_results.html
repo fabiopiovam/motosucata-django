@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block title %} Resultado da busca {% endblock %}
+
+{% block content %}
+
+<div class="section hero"> </div>
+<div class="section">
+    <div class="w-container">
+        
+        {% include "products/_search_form.html" %}
+        
+        <div class="w-row">
+            {% for product in product_list %}
+            <div class="w-col w-col-3 w-col-small-6">
+                <img src='{{ product.main_photo_set.image|thumbnail_url:"small"|default:"holder.js/140x140" }}'>
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.get_type_display }}</p>
+                <p>{{ product.year|stringformat:"s" }} | {{ product.km }} Km</p>
+                <a class="button" href="{{ product.get_absolute_url }}" title="Confira!">R$ {{ product.price }}</a>
+            </div>
+            
+            {% if forloop.counter|divisibleby:"4" %}
+            </div><div class="w-row">
+            {% endif %}
+            
+            {% empty %}
+            
+            <p>Nenhum produto encontrado! Por favor, tente novamente.</p>
+            
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

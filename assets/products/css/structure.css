@@ -78,6 +78,13 @@ p {
     color: white;
     font-size: 20px;
 }
+
+.company a{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
 .nav-link {
     display: inline-block;
     padding: 20px 18px;
