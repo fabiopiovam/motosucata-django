@@ -44,6 +44,9 @@ DEFAULT_FROM_EMAIL  = 'webmaster_mail'
 ADMINS              = ((u'your name', DEFAULT_FROM_EMAIL),)
 MANAGERS            = ((u'The manager name', 'manager_mail'),)
 
+
+SESSION_COOKIE_NAME = 'sessionid' # Cookie name. This can be whatever you want.
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -122,8 +125,6 @@ THUMBNAIL_ALIASES = {
 FLEXSELECT = {
     'include_jquery': True,
 }
-
-SESSION_COOKIE_NAME = 'sessionid' # Cookie name. This can be whatever you want.
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
