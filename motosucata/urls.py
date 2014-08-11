@@ -7,7 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/?', include(admin.site.urls)),
     url(r'^redactor/', include('redactor.urls')),
     #(r'^pages/', include('django.contrib.flatpages.urls')),
     

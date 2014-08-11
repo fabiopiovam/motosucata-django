@@ -47,6 +47,19 @@ MANAGERS            = ((u'The manager name', 'manager_mail'),)
 
 SESSION_COOKIE_NAME = 'sessionid' # Cookie name. This can be whatever you want.
 
+# django-secure
+# https://github.com/carljm/django-secure/
+SECURE_SSL_REDIRECT         = False
+SECURE_FRAME_DENY           = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER   = True
+SECURE_HSTS_SECONDS         = 3
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+SECURE_REDIRECT_EXEMPT = [
+    '^(?!admin)/?',
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -146,6 +159,7 @@ INSTALLED_APPS = (
     'redactor',
     'flexselect',
     'embed_video',
+    'djangosecure',
     
     'products',
 )
@@ -158,4 +172,5 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'djangosecure.middleware.SecurityMiddleware',
 )
