@@ -32,6 +32,8 @@ Uso e Instalação
 
 6. Colete os arquivos estáticos: `$ python manage.py collectstatic`
 
+7. Por fim, execute `$ python manage.py runserver`
+
 
 Referências
 -----------

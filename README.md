@@ -32,6 +32,8 @@ Installation / Usage
 
 6. Collect static files with `$ python manage.py collectstatic`
 
+7. Finally, run `$ python manage.py runserver`
+
 
 References
 ----------
