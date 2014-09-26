@@ -59,6 +59,8 @@ SECURE_REDIRECT_EXEMPT = [
     '^(?!admin)/?',
 ]
 
+#Google Analytics: change UA-XXXXX-X to be your site's ID.
+GOOGLE_ANALYTICS_CODE = 'UA-XXXXXXXX-XX'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
