@@ -66,4 +66,4 @@ static/*
 # Others
 motosucata/settings_local.py
 motosucata/settings_production.py
-deploy
+production_env/
